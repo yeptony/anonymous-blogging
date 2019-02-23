@@ -1,0 +1,10 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["plugin:prettier/recommended"],
+  "plugins": ["react", "jsx-a11y", "import"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "react/jsx-filename-extension": 0,
+    "react/react-in-jsx-scope": "off"
+  }
+}
