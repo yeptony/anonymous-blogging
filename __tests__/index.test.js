@@ -1,8 +1,12 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
-import Home from '../pages/index.js'
+import Home from '../pages/index'
 
-it("works", () => {
-  
+describe('Pages', () => {
+  describe('Index', () => {
+    it('should render without throwing an error', () => {
+      
+    })
+  })
 })

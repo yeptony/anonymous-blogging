@@ -1,7 +1,7 @@
 const Header = () => (
   <nav className="header">
-    <p>Blogger</p>
-    <ul>
+    <p className="logo">Blogger</p>
+    <ul className="header-menu">
       <li>Home</li>
       <li>About</li>
     </ul>

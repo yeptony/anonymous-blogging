@@ -1,11 +1,10 @@
 import '../style/main.scss'
-import Header from '../components/Header'
+import Layout from '../components/Layout'
 
 const Home = () => (
-  <div>
-    <Header />
-    <div>This is an empty div</div>
-  </div>
+  <Layout>
+    <div>Hello</div>
+  </Layout>
 )
 
 export default Home
