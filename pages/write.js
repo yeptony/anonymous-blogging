@@ -1,4 +1,5 @@
 import Remarkable from 'remarkable'
+import firebase from '../lib/db'
 import Layout from '../components/Layout'
 import MarkdownPreviewerHeader from '../components/MardownPreviewerHeader'
 import MarkdownPreviewer from '../components/MarkdownPreviewer'
@@ -11,11 +12,12 @@ const md = new Remarkable({
 })
 
 class Write extends React.Component {
+  
   constructor() {
     super()
     this.state = {
       timestamp: Date.now(),
-      author: '',
+      author: 'Johnny',
       title: 'Untitled',
       markdown: '',
       formattedText: ''
@@ -39,12 +41,20 @@ class Write extends React.Component {
 
   publish(e) {
     e.preventDefault()
-    return {
+    let data = {
       timestamp: Date.now(),
       author: this.state.author,
       title: this.state.title,
       formattedText: this.state.formattedText
     }
+    let db = firebase.firestore()
+    db.collection('posts').add(data)
+      .then(post => {
+        console.log("Post successfully saved: ", post.id)
+      })
+      .catch(err => {
+        console.log("An error occurred: ", err)
+      })
   }
 
   render() {
