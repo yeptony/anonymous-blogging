@@ -1,0 +1,38 @@
+.write-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  .write-sub-container {
+    flex: 0 1 100%;
+    padding: 16px;
+    display: flex;
+    textarea {
+      box-sizing: border-box;
+      height: 100%;
+      flex: 0 1 100%;
+      border: solid 1px #333;
+      border-radius: 8px;
+      resize: none;
+      padding: 8px;
+      &:focus {
+        outline: none;
+      }
+    }
+    .markdown-preview {
+      box-sizing: border-box;
+      height: 100%;
+      flex: 0 1 100%;
+      border: solid 1px #333;
+      border-radius: 8px;
+      padding: 8px;
+      overflow-y: auto;
+      * {
+        word-break: break-all;
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
