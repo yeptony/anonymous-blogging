@@ -1,40 +1,39 @@
 import Remarkable from 'remarkable'
+import Layout from '../components/Layout'
+import MarkdownPreviewer from '../components/MarkdownPreviewer'
 import '../style/main.scss'
 
 const md = new Remarkable({
   xhtmlOut: true,
   breaks: true,
-  linkify: true,
+  linkify: true
 })
 
 class Write extends React.Component {
   constructor() {
     super()
     this.state = {
-      markdown: ''
+      timestamp: 0,
+      author: '',
+      title: 'Untitled',
+      markdown: '',
+      formattedText: ''
     }
-    this.onType = this.onType.bind(this)
+    this.onMarkdownType = this.onMarkdownType.bind(this)
   }
 
-  onType(e) {
+  onMarkdownType(e) {
     this.setState({
       markdown: e.target.value,
+      formattedText: md.render(e.target.value)
     })
   }
 
   render() {
     return (
-      <div className="write-container">
-        <div className="write-sub-container">
-          <textarea value={this.state.markdown} onChange={this.onType}/>
-        </div>
-        <div className="write-sub-container">
-          <div
-            className="markdown-preview"
-            dangerouslySetInnerHTML={{ __html: md.render(this.state.markdown) }}
-          />
-        </div>
-      </div>
+      <Layout>
+        <MarkdownPreviewer {...this.state} onType={this.onMarkdownType} />
+      </Layout>
     )
   }
 }
