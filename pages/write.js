@@ -3,6 +3,8 @@ import firebase from '../lib/db'
 import Layout from '../components/Layout'
 import MarkdownPreviewerHeader from '../components/MardownPreviewerHeader'
 import MarkdownPreviewer from '../components/MarkdownPreviewer'
+import Error from '../components/Error'
+import sanitize from '../lib/sanitize'
 import '../style/main.scss'
 
 const md = new Remarkable({
@@ -12,7 +14,6 @@ const md = new Remarkable({
 })
 
 class Write extends React.Component {
-  
   constructor() {
     super()
     this.state = {
@@ -20,7 +21,15 @@ class Write extends React.Component {
       author: 'Johnny',
       title: 'Untitled',
       markdown: '',
-      formattedText: ''
+      formattedText: '',
+      error: {
+        isError: false,
+        message: ''
+      },
+      success:{
+        isSuccess: false,
+        message: ''
+      }
     }
     this.onMarkdownType = this.onMarkdownType.bind(this)
     this.setTitle = this.setTitle.bind(this)
@@ -35,31 +44,55 @@ class Write extends React.Component {
   }
 
   setTitle(e) {
-    let title = e.target.value === '' ? 'Untitled' : e.target.value.toString()
+    const title = e.target.value === '' ? 'Untitled' : e.target.value.toString()
     this.setState({ title })
   }
 
   publish(e) {
     e.preventDefault()
-    let data = {
+    const data = {
       timestamp: Date.now(),
       author: this.state.author,
       title: this.state.title,
       formattedText: this.state.formattedText
     }
-    let db = firebase.firestore()
-    db.collection('posts').add(data)
-      .then(post => {
-        console.log("Post successfully saved: ", post.id)
+    if (sanitize(data).isError) {
+      this.setState({
+        error: {
+          isError: true,
+          message: sanitize(data).message
+        }
       })
-      .catch(err => {
-        console.log("An error occurred: ", err)
-      })
+    } else {
+      const db = firebase.firestore()
+      db.collection('posts').add(data)
+        .then(post => {
+          this.setState({
+            error: {
+              isError: false,
+              message: ''
+            },
+            success: {
+              isSUcces: true,
+              message: `Post ${post.id} saved successfully`
+            }
+          })
+        })
+        .catch(err => {
+          this.setState({
+            error: {
+              isError: true,
+              message: `An error occured while saving to the database: ${err}`
+            }
+          })
+        })
+    }
   }
 
   render() {
     return (
       <Layout>
+        {this.state.error.isError && <Error message={this.state.error.message}/>}
         <MarkdownPreviewerHeader {...this.state} onChange={this.setTitle} publish={this.publish} />
         <MarkdownPreviewer {...this.state} onType={this.onMarkdownType} />
       </Layout>

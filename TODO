@@ -1,3 +1,4 @@
-☐ build header
-☐ test header
-☐ build front page
+☐ sanitize data before adding post to database
+  ✔ write helper function to check data @done(19-02-25 20:44)
+  ☐ test it
+

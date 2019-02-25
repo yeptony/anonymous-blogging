@@ -10,7 +10,7 @@ const MarkdownPreviewerHeader = props => (
       <input type="text" placeholder="Untitled" onChange={props.onChange} value={props.title} />
     </div>
     <div className="button-group">
-      <button type="button" className="button-small solid-button" onClick={props.publish}>
+      <button type="button" className="publish button-small solid-button" onClick={props.publish}>
         Publish
       </button>
       <Link href="/">
