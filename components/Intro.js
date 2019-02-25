@@ -10,10 +10,10 @@ const Intro = props => (
     </p>
     <div className="button-group">
       <Link href="/read">
-        <button className="read-button">Read</button>
+        <button type="button" className="button-large solid-button">Read</button>
       </Link>
       <Link href="/write">
-        <button className="write-button">Write</button>
+        <button type="button" className="button-large transparent-button">Write</button>
       </Link>
     </div>
   </div>

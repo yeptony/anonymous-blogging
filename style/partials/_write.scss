@@ -1,11 +1,50 @@
+.markdown-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 16px 4px 16px;
+  .button-group {
+    margin-top: auto;
+    margin-bottom: 0;
+    button {
+      height: 45px;
+      margin-right: 0;
+    }
+  }
+  .title-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 50%;
+    input {
+      font-size: 24px;
+      border: solid 1px #333;
+      border-radius: 8px;
+      padding: 8px;
+      margin-top: 8px;
+      &:focus {
+        outline: none;
+      }
+    }
+    p {
+      margin: 0;
+      span {
+        padding-left: 8px;
+        font-size: 10px;
+        color: #888;
+      }
+    }
+  }
+}
+
 .write-container {
-  height: calc(100vh - 51px);
+  height: calc(100vh - 51px - 87px);
   display: flex;
   flex-direction: row;
   justify-content: center;
   .write-sub-container {
     flex: 0 1 100%;
     padding: 16px;
+    padding-top: 4px;
     display: flex;
     textarea {
       box-sizing: border-box;
@@ -28,7 +67,7 @@
       padding: 8px;
       overflow-y: auto;
       * {
-        word-break: break-all;
+        word-break: normal;
       }
       img {
         max-width: 100%;

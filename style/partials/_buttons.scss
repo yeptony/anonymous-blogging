@@ -1,0 +1,32 @@
+.button-group {
+  margin-top: 24px;
+  button {
+    cursor: pointer;
+    box-shadow: none;
+    border: solid 1px blue;
+    border-radius: 8px;
+    transition: all 0.3s ease 0s;
+    outline: none;
+    &:hover {
+      box-shadow: 0px 8px 12px rgba(46, 104, 229, 0.4);
+    }
+  }
+  .button-small {
+    font-size: 14px;
+    padding: 8px 24px;
+    margin: 0 6px;
+  }
+  .button-large {
+    font-size: 16px;
+    padding: 12px 48px;
+    margin: 0 12px;
+  }
+  .transparent-button {
+    color: blue;
+    background: #fff;
+  }
+  .solid-button {
+    color: #fff;
+    background: blue;
+  }
+}
